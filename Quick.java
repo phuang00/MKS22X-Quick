@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Quick{
 
     /*Choose a random pivot element between the start and end index inclusive,
@@ -9,7 +11,7 @@ public class Quick{
    *4. all elements in range that are larger than the pivot element are placed after the pivot element.
    *@return the index of the final position of the pivot element.
    */
-  private static int partition(int [] data, int start, int end){
+  private static int partition(int[] data, int start, int end){
     int index = (int)(Math.random() * (end - start + 1)) + start;
     // index is set to random index within the range start and end, inclusive
     int pivot = data[index];
@@ -60,8 +62,23 @@ public class Quick{
 
     /*return the value that is the kth smallest value of the array.
    */
-   public static int quickselect(int []data, int k){
+   public static int quickselect(int[]data , int k){
+     return -1;
+   }
 
+   private static boolean parts(int index, int[] data, int start, int end){
+     int pivot = data[index];
+     for (int i = 0; i < data.length; i++){
+       if ((i < index && data[i] > pivot) || (i > index && data[i] < pivot)){
+         return false;
+       }
+     }
+     return true;
+   }
+
+   public static void main(String[] args) {
+     int[] array = new int[] {999,999,999,4,1,0,3,2,999,999,999};
+     System.out.println(parts(partition(array, 0, 10), array, 0, 10));
    }
 
 }
