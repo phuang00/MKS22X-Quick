@@ -63,12 +63,15 @@ public class Quick{
     /*return the value that is the kth smallest value of the array.
    */
    public static int quickselect(int[]data , int k){
+     int start = 0;
+     int end = data.length - 1;
+     int ans = partition(data, start, end);
      return -1;
    }
 
    private static boolean parts(int index, int[] data, int start, int end){
      int pivot = data[index];
-     for (int i = 0; i < data.length; i++){
+     for (int i = start; i < end + 1; i++){
        if ((i < index && data[i] > pivot) || (i > index && data[i] < pivot)){
          return false;
        }
