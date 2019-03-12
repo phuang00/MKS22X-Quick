@@ -28,10 +28,13 @@ public class Quick{
     index = start;
     start++;
     // start is increased by one
+    Random rand = new Random();
+    // initialize random number generator
     while (start != end){
       // while start is not equal to end
-      if (data[start] > pivot){
-        // if the value at start is greater than pivot
+      if (data[start] > pivot || (data[start] == pivot && rand.nextInt() % 2 == 0)){
+        // if the value at start is greater than pivot or
+        // the value at start is equal to pivot and the randomly generated int is multiple of 2 (50% chance)
         int temp = data[start];
         // value at index start is stored in a temp variable
         data[start] = data[end];
