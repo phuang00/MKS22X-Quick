@@ -14,8 +14,12 @@ public class Quick{
   private static int partition(int[] data, int start, int end){
     if (start == end) return start;
     // if start and end are the same (meaning nothing is to be sorted), return start
-    int index = (int)(Math.random() * (end - start + 1)) + start;
-    // index is set to random index within the range start and end, inclusive
+    int[] tempAry = new int[] {start, end, data[data.length/2]};
+    // make int array of the start, end, and middle value
+    Arrays.sort(tempAry);
+    // sort the array
+    int index = tempAry[1];
+    // index is set to the median of start, end and middle value
     int pivot = data[index];
     // pivot is set to the int at the index index of data
     data[index] = data[start];
@@ -94,7 +98,7 @@ public class Quick{
        // call partition again with new start/end values and set the return value to ans
      }
      return data[ans];
-     // return the value at index ans 
+     // return the value at index ans
    }
 
    private static boolean parts(int index, int[] data, int start, int end){
