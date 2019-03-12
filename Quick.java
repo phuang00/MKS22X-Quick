@@ -65,8 +65,20 @@ public class Quick{
    public static int quickselect(int[]data , int k){
      int start = 0;
      int end = data.length - 1;
+     //System.out.println(end);
      int ans = partition(data, start, end);
-     return -1;
+     while (ans != k){
+       //System.out.println("index : " + ans);
+       //System.out.println("data : " + Arrays.toString(data));
+       if (ans > k){
+         end = ans;
+       }
+       else{
+         start = ans;
+       }
+       ans = partition(data,start,end);
+     }
+     return data[ans];
    }
 
    private static boolean parts(int index, int[] data, int start, int end){
@@ -81,7 +93,28 @@ public class Quick{
 
    public static void main(String[] args) {
      int[] array = new int[] {999,999,999,4,1,0,3,2,999,999,999};
-     System.out.println(parts(partition(array, 0, 10), array, 0, 10));
+     System.out.println(Arrays.toString(array));
+     //System.out.println(parts(partition(array, 0, 10), array, 0, 10));
+     for (int i = 0; i < array.length; i++){
+       System.out.println("term " + i + ": "+ quickselect(array, i));
+     }
+
+     System.out.println();
+
+     array = new int[] {4,19,6};
+     System.out.println(Arrays.toString(array));
+     for (int i = 0; i < array.length; i++){
+       System.out.println("term " + i + ": "+ quickselect(array, i));
+     }
+
+     System.out.println();
+
+     array = new int[] {40,-19, 39, 5,20,390,239};
+     System.out.println(Arrays.toString(array));
+     for (int i = 0; i < array.length; i++){
+       System.out.println("term " + i + ": "+ quickselect(array, i));
+     }
+
    }
 
 }
