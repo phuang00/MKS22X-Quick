@@ -16,9 +16,10 @@ public class Quick{
     // index is set to random index within the range start and end, inclusive
     int pivot = data[index];
     // pivot is set to the int at the index index of data
-    data[index] = data[0];
-    data[0] = pivot;
-    // pivot swaps places with the value at index 0 of data
+    data[index] = data[start];
+    data[start] = pivot;
+    // pivot swaps places with the value at index start of data
+    index = start;
     start++;
     // start is increased by one
     while (start != end){
@@ -38,7 +39,7 @@ public class Quick{
     }
     if (data[start] < pivot){
       // if value at start is less than pivot
-      data[0] = data[start];
+      data[index] = data[start];
       data[start] = pivot;
       // pivot and the value at start swap places
 
@@ -49,7 +50,7 @@ public class Quick{
     }
     else{
       // else
-      data[0] = data[start - 1];
+      data[index] = data[start - 1];
       data[start - 1] = pivot;
       // pivot and the value at index (start - 1) swap places
 
