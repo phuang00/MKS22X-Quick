@@ -73,9 +73,9 @@ public class Quick{
     }
   }
 
-    /*return the value that is the kth smallest value of the array.
+  /*return the value that is the kth smallest value of the array. k=0 is the smallest
    */
-   public static int quickselect(int[]data , int k){
+   public static int quickselect(int[] data, int k){
      int start = 0;
      int end = data.length - 1;
      // set start to index 0 and end to last index
@@ -114,6 +114,20 @@ public class Quick{
      return true;
    }
 
+   /*Modify the array to be in increasing order.
+   */
+   public static void quicksort(int[] data){
+     quickH(data, 0, data.length - 1);
+   }
+
+   private static void quickH(int[] data, int start, int end){
+     if (start != end){
+       int ans = partition(data, start, end);
+       quickH(data, start, ans - 1);
+       quickH(data, ans + 1, end);
+     }
+   }
+
    public static void main(String[] args) {
      int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
      System.out.println(Arrays.toString(array));
@@ -137,6 +151,34 @@ public class Quick{
      for (int i = 0; i < array.length; i++){
        System.out.println("term " + i + ": "+ quickselect(array, i));
      }
+
+     System.out.println();
+
+     array = new int[] {4,19,6};
+     System.out.println(Arrays.toString(array));
+     quicksort(array);
+     System.out.println(Arrays.toString(array));
+
+     System.out.println();
+
+     array = new int[] {40,-19, 39, 5,20,390,239};
+     System.out.println(Arrays.toString(array));
+     quicksort(array);
+     System.out.println(Arrays.toString(array));
+
+     System.out.println();
+
+     array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
+     System.out.println(Arrays.toString(array));
+     quicksort(array);
+     System.out.println(Arrays.toString(array));
+
+     System.out.println();
+
+     array = new int[] {0,0,0,0,1,2,3,3,3,3,4,5,2,8,6};
+     System.out.println(Arrays.toString(array));
+     quicksort(array);
+     System.out.println(Arrays.toString(array));
 
    }
 
