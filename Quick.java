@@ -14,14 +14,19 @@ public class Quick{
   private static int partition(int[] data, int start, int end){
     if (start == end) return start;
     // if start and end are the same (meaning nothing is to be sorted), return start
-    int[] tempAry = new int[] {start, end, data[data.length/2]};
+    int[] tempAry = new int[] {data[start], data[end], data[data.length/2]};
     // make int array of the start, end, and middle value
     Arrays.sort(tempAry);
     // sort the array
-    int index = tempAry[1];
-    // index is set to the median of start, end and middle value
-    int pivot = data[index];
-    // pivot is set to the int at the index index of data
+    int pivot = tempAry[1];
+    // pivot is set to the medium
+    int index = data.length/2;
+    if (data[start] == pivot){
+      index = start;
+    }
+    else if (data[end] == pivot){
+      index = end;
+    }
     data[index] = data[start];
     data[start] = pivot;
     // pivot swaps places with the value at index start of data
