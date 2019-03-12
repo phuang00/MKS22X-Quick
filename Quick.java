@@ -16,6 +16,7 @@ public class Quick{
     // index is set to random index within the range start and end, inclusive
     int pivot = data[index];
     // pivot is set to the int at the index index of data
+    if (start == end) return start;
     data[index] = data[start];
     data[start] = pivot;
     // pivot swaps places with the value at index start of data
@@ -37,8 +38,11 @@ public class Quick{
       else start++;
       // else if value at start is less than pivot, increase start by one
     }
+    //System.out.println(start);
+    //System.out.println(pivot);
+    //System.out.println(Arrays.toString(data));
     if (data[start] < pivot){
-      // if value at start is less than pivot
+      // if value at start is less than or equal to pivot
       data[index] = data[start];
       data[start] = pivot;
       // pivot and the value at start swap places
@@ -72,11 +76,12 @@ public class Quick{
        //System.out.println("index : " + ans);
        //System.out.println("data : " + Arrays.toString(data));
        if (ans > k){
-         end = ans;
+         end = ans - 1;
        }
        else{
-         start = ans;
+         start = ans + 1;
        }
+       //System.out.println("start " + start + " end " + end);
        ans = partition(data,start,end);
      }
      return data[ans];
@@ -93,7 +98,7 @@ public class Quick{
    }
 
    public static void main(String[] args) {
-     int[] array = new int[] {999,999,999,4,1,0,3,2,999,999,999};
+     int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
      System.out.println(Arrays.toString(array));
      //System.out.println(parts(partition(array, 0, 10), array, 0, 10));
      for (int i = 0; i < array.length; i++){
