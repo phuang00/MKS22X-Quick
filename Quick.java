@@ -12,11 +12,12 @@ public class Quick{
    *@return the index of the final position of the pivot element.
    */
   private static int partition(int[] data, int start, int end){
+    if (start == end) return start;
+    // if start and end are the same (meaning nothing is to be sorted), return start
     int index = (int)(Math.random() * (end - start + 1)) + start;
     // index is set to random index within the range start and end, inclusive
     int pivot = data[index];
     // pivot is set to the int at the index index of data
-    if (start == end) return start;
     data[index] = data[start];
     data[start] = pivot;
     // pivot swaps places with the value at index start of data
@@ -70,21 +71,30 @@ public class Quick{
    public static int quickselect(int[]data , int k){
      int start = 0;
      int end = data.length - 1;
+     // set start to index 0 and end to last index
      //System.out.println(end);
      int ans = partition(data, start, end);
+     // temp ans or pivot is equal to the return value after partitioning it once
      while (ans != k){
+       // while ans is not equal to k
        //System.out.println("index : " + ans);
        //System.out.println("data : " + Arrays.toString(data));
        if (ans > k){
+         // if ans is greater than k
          end = ans - 1;
+         // set end (upper bound) to one less than ans
        }
        else{
+         // else (if ans is less than k)
          start = ans + 1;
+         // set start (lower bound) to one more than ans
        }
        //System.out.println("start " + start + " end " + end);
        ans = partition(data,start,end);
+       // call partition again with new start/end values and set the return value to ans
      }
      return data[ans];
+     // return the value at index ans 
    }
 
    private static boolean parts(int index, int[] data, int start, int end){
