@@ -145,7 +145,7 @@ public class Quick{
 
    public static void main(String[] args) {
      int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
-     System.out.println(Arrays.toString(array));
+     /*System.out.println(Arrays.toString(array));
      //System.out.println(parts(partition(array, 0, 10), array, 0, 10));
      for (int i = 0; i < array.length; i++){
        System.out.println("term " + i + ": "+ quickselect(array, i));
@@ -167,33 +167,55 @@ public class Quick{
        System.out.println("term " + i + ": "+ quickselect(array, i));
      }
 
-     System.out.println();
+     System.out.println();*/
 
      array = new int[] {4,19,6};
+     int[] ary = new int[] {4,19,6};
      System.out.println(Arrays.toString(array));
      quicksort(array);
-     System.out.println(Arrays.toString(array));
+     Arrays.sort(ary);
+     boolean equal = true;
+     for (int i = 0; i < ary.length; i++){
+       if (array[i] != ary[i]) equal = false;
+     }
+     System.out.println(equal);
 
      System.out.println();
 
      array = new int[] {40,-19, 39, 5,20,390,239};
+     ary = new int[] {40,-19, 39, 5,20,390,239};
      System.out.println(Arrays.toString(array));
      quicksort(array);
-     System.out.println(Arrays.toString(array));
-
-     System.out.println();
+     Arrays.sort(ary);
+     equal = true;
+     for (int i = 0; i < ary.length; i++){
+       if (array[i] != ary[i]) equal = false;
+     }
+     System.out.println(equal);
 
      array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
+     ary = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
      System.out.println(Arrays.toString(array));
      quicksort(array);
-     System.out.println(Arrays.toString(array));
+     Arrays.sort(ary);
+     equal = true;
+     for (int i = 0; i < ary.length; i++){
+       if (array[i] != ary[i]) equal = false;
+     }
+     System.out.println(equal);
 
      System.out.println();
 
      array = new int[] {0,0,0,0,1,2,3,3,3,3,4,5,2,8,6};
+     ary = new int[] {0,0,0,0,1,2,3,3,3,3,4,5,2,8,6};
      System.out.println(Arrays.toString(array));
      quicksort(array);
-     System.out.println(Arrays.toString(array));
+     Arrays.sort(ary);
+     equal = true;
+     for (int i = 0; i < ary.length; i++){
+       if (array[i] != ary[i]) equal = false;
+     }
+     System.out.println(equal);
 
    }
 
