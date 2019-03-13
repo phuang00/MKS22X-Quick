@@ -149,8 +149,8 @@ public class Quick{
          int temp = i;
          data[lt] = data[i];
          data[i] = pivot;
-         i = lt + 1;
-         lt = temp;
+         lt++;
+         i++;
        }
        else if (data[i] == pivot){
          i++;
@@ -162,6 +162,7 @@ public class Quick{
          gt--;
        }
      }
+     System.out.println("lt: " + lt + "\ti: " + i + "\tgt" + gt + "\t" + Arrays.toString(data));
        //your code
        //return an array [lt,gt]
        return new int[] {lt, gt};
