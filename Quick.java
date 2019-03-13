@@ -126,18 +126,21 @@ public class Quick{
    }
 
    private static void quickH(int[] data, int start, int end){
-     if (start != end){
-       int ans = partition(data, start, end);
-       //System.out.println("start : " + start + "   end: " + end);
-       //System.out.println(Arrays.toString(data));
-       //System.out.println("ans: " + ans);
-       if (ans == start) quickH(data, ans + 1, end);
-       else if (ans == end) quickH(data, start, ans -1);
-       else{
-         quickH(data, start, ans - 1);
-         quickH(data, ans + 1, end);
-       }
+     if (start >= end){
+       return;
      }
+     int ans = partition(data, start, end);
+     //System.out.println("start : " + start + "   end: " + end);
+     //System.out.println(Arrays.toString(data));
+     //System.out.println("ans: " + ans);
+     quickH(data, start, ans - 1);
+     quickH(data, ans + 1, end);
+   }
+
+   private int[] partitionDutch(int[] data, int lo, int hi){
+       //your code
+       //return an array [lt,gt]
+       return new int[] {};
    }
 
    public static void main(String[] args) {
