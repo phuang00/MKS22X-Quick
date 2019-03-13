@@ -121,11 +121,11 @@ public class Quick{
 
    /*Modify the array to be in increasing order.
    */
-   public static void quicksort(int[] data){
-     quickH(data, 0, data.length - 1);
+   public static void oldQuicksort(int[] data){
+     oldQuickH(data, 0, data.length - 1);
    }
 
-   private static void quickH(int[] data, int start, int end){
+   private static void oldQuickH(int[] data, int start, int end){
      if (start >= end){
        return;
      }
@@ -133,18 +133,18 @@ public class Quick{
      //System.out.println("start : " + start + "   end: " + end);
      //System.out.println(Arrays.toString(data));
      //System.out.println("ans: " + ans);
-     quickH(data, start, ans - 1);
-     quickH(data, ans + 1, end);
+     oldQuickH(data, start, ans - 1);
+     oldQuickH(data, ans + 1, end);
    }
 
    private static int[] partitionDutch(int[] data, int lo, int hi){
      int lt = lo;
      int gt = hi;
      int pivot = data[lt];
-     System.out.println("pivot: " + pivot);
+     //System.out.println("pivot: " + pivot);
      int i = lt + 1;
      while (i <= gt){
-       System.out.println("lt: " + lt + "\ti: " + i + "\tgt" + gt + "\t" + Arrays.toString(data));
+       //System.out.println("lt: " + lt + "\ti: " + i + "\tgt" + gt + "\t" + Arrays.toString(data));
        if (data[i] < pivot){
          int temp = i;
          data[lt] = data[i];
@@ -162,10 +162,23 @@ public class Quick{
          gt--;
        }
      }
-     System.out.println("lt: " + lt + "\ti: " + i + "\tgt" + gt + "\t" + Arrays.toString(data));
-       //your code
-       //return an array [lt,gt]
-       return new int[] {lt, gt};
+     //System.out.println("lt: " + lt + "\ti: " + i + "\tgt" + gt + "\t" + Arrays.toString(data));
+     //your code
+     //return an array [lt,gt]
+     return new int[] {lt, gt};
+   }
+
+   public static void quicksort(int[] data){
+     quickH(data, 0, data.length - 1);
+   }
+
+   private static void quickH(int[] data, int lo, int hi){
+     if (lo >= hi){
+       return;
+     }
+     int[] pivots = partitionDutch(data, lo, hi);
+     quickH(data, lo, pivots[0] - 1);
+     quickH(data, pivots[1] + 1, hi);
    }
 
    public static void main(String[] args) {
@@ -196,7 +209,7 @@ public class Quick{
 
      /*array = new int[] {4,19,6};
      int[] ary = new int[] {4,19,6};
-     System.out.println(Arrays.toString(array));
+     //System.out.println(Arrays.toString(array));
      quicksort(array);
      Arrays.sort(ary);
      boolean equal = true;
@@ -240,11 +253,19 @@ public class Quick{
      for (int i = 0; i < ary.length; i++){
        if (array[i] != ary[i]) equal = false;
      }
-     System.out.println(equal);*/
+     System.out.println(equal);
 
-     array = new int[] {2,1,2,1,2,1,2,1,2,1,3,1,4,1,2,7,1};
+     /*array = new int[] {2,1,2,1,2,1,2,1,2,1,3,1,4,1,2,7,1};
      System.out.println(Arrays.toString(partitionDutch(array, 0, array.length - 1)));
-     System.out.println(Arrays.toString(array));
+     System.out.println(Arrays.toString(array));*/
+
+     int[] ary = new int[4000000];
+     for(int i = 0; i < ary.length;i++){
+       ary[i] = (int)(Math.random() * 100);
+     }
+     quicksort(ary);
+     //Arrays.sort(ary);
+     System.out.println(Arrays.toString(ary));
    }
 
 }
