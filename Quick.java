@@ -146,7 +146,6 @@ public class Quick{
      while (i <= gt){
        //System.out.println("lt: " + lt + "\ti: " + i + "\tgt" + gt + "\t" + Arrays.toString(data));
        if (data[i] < pivot){
-         int temp = i;
          data[lt] = data[i];
          data[i] = pivot;
          lt++;
