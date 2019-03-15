@@ -142,8 +142,13 @@ public class Quick{
      //set lt to the lowest index
      int gt = hi;
      // set gt to the highest index
-     int pivot = data[lt];
-     // set pivot to the value at lt
+     int index = (int)(Math.random() * (hi - lo + 1)) + lo;
+     // index of pivot would be a randomly generated int between lo and hi
+     int pivot = data[index];
+     // set pivot to the value at the index
+     data[index] = data[lo];
+     data[lo] = pivot;
+     // swap pivot with the value at lo
      //System.out.println("pivot: " + pivot);
      int i = lt + 1;
      // start comparing values from index lt + 1
@@ -229,6 +234,21 @@ public class Quick{
        }
        System.out.println();
      }
+     int[] list = new int[1000000];
+     int[] ary = new int[1000000];
+     for (int i = 0; i < list.length; i++){
+       list[i] = 1000000 - i;
+       ary[i] = list[i];
+     }
+     long t1 = System.currentTimeMillis();
+     quicksort(list);
+     long t2 = System.currentTimeMillis();
+     long qtime = t2-t1;
+     t1 = System.currentTimeMillis();
+     Arrays.sort(ary);
+     t2 = System.currentTimeMillis();
+     long btime = t2-t1;
+     System.out.println(1.0*qtime/btime);
    }
 
 }
