@@ -109,7 +109,7 @@ public class Quick{
      // return the value at index ans
    }
 
-   private static boolean parts(int index, int[] data, int start, int end){
+   /*private static boolean parts(int index, int[] data, int start, int end){
      int pivot = data[index];
      for (int i = start; i < end + 1; i++){
        if ((i < index && data[i] > pivot) || (i > index && data[i] < pivot)){
@@ -117,7 +117,7 @@ public class Quick{
        }
      }
      return true;
-   }
+   }*/
 
    /*Modify the array to be in increasing order.
    */
@@ -139,132 +139,96 @@ public class Quick{
 
    private static int[] partitionDutch(int[] data, int lo, int hi){
      int lt = lo;
+     //set lt to the lowest index
      int gt = hi;
+     // set gt to the highest index
      int pivot = data[lt];
+     // set pivot to the value at lt
      //System.out.println("pivot: " + pivot);
      int i = lt + 1;
+     // start comparing values from index lt + 1
      while (i <= gt){
+       // while the index being checked is less than or equal to gt
        //System.out.println("lt: " + lt + "\ti: " + i + "\tgt" + gt + "\t" + Arrays.toString(data));
        if (data[i] < pivot){
+         // if the value is less than pivot
          data[lt] = data[i];
          data[i] = pivot;
+         // swap the value at the current index with the first one of the duplicate pivots
          lt++;
          i++;
+         // increase current index (i) and lt by one
        }
        else if (data[i] == pivot){
+         // else if the value is equal to pivot, increase i by one
          i++;
        }
        else{
+         // else (if the value is greater than pivot)
          int temp = data[gt];
          data[gt] = data[i];
          data[i] = temp;
+         // swap the value at gt with the value at i
          gt--;
+         // decrease gt by one
        }
      }
      //System.out.println("lt: " + lt + "\ti: " + i + "\tgt" + gt + "\t" + Arrays.toString(data));
-     //your code
-     //return an array [lt,gt]
      return new int[] {lt, gt};
+     //return the array [lt,gt]
    }
 
    public static void quicksort(int[] data){
      quickH(data, 0, data.length - 1);
+     // call helper method
    }
 
    private static void quickH(int[] data, int lo, int hi){
      if (lo >= hi){
+       //if the lower index is less than or equal to the higher index, do nothing
        return;
      }
      int[] pivots = partitionDutch(data, lo, hi);
+     // pivots array is equal to the return values of Dutch partition
      quickH(data, lo, pivots[0] - 1);
+     // call function itself with upper bound being one less than the gt index given by pivots
      quickH(data, pivots[1] + 1, hi);
+     // call function itself with lower bound being one more than the lt index given by pivots
    }
 
-   public static void main(String[] args) {
-     int[] array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
-     /*System.out.println(Arrays.toString(array));
-     //System.out.println(parts(partition(array, 0, 10), array, 0, 10));
-     for (int i = 0; i < array.length; i++){
-       System.out.println("term " + i + ": "+ quickselect(array, i));
+   public static void main(String[]args){
+     System.out.println("Size\t\tMax Value\tquick/builtin ratio ");
+     int[]MAX_LIST = {1000000000,500,10};
+     for(int MAX : MAX_LIST){
+       for(int size = 31250; size < 2000001; size*=2){
+         long qtime=0;
+         long btime=0;
+         //average of 5 sorts.
+         for(int trial = 0 ; trial <=5; trial++){
+           int []data1 = new int[size];
+           int []data2 = new int[size];
+           for(int i = 0; i < data1.length; i++){
+             data1[i] = (int)(Math.random()*MAX);
+             data2[i] = data1[i];
+           }
+           long t1,t2;
+           t1 = System.currentTimeMillis();
+           Quick.quicksort(data2);
+           t2 = System.currentTimeMillis();
+           qtime += t2 - t1;
+           t1 = System.currentTimeMillis();
+           Arrays.sort(data1);
+           t2 = System.currentTimeMillis();
+           btime+= t2 - t1;
+           if(!Arrays.equals(data1,data2)){
+             System.out.println("FAIL TO SORT!");
+             System.exit(0);
+           }
+         }
+         System.out.println(size +"\t\t"+MAX+"\t"+1.0*qtime/btime);
+       }
+       System.out.println();
      }
-
-     System.out.println();
-
-     array = new int[] {4,19,6};
-     System.out.println(Arrays.toString(array));
-     for (int i = 0; i < array.length; i++){
-       System.out.println("term " + i + ": "+ quickselect(array, i));
-     }
-
-     System.out.println();
-
-     array = new int[] {40,-19, 39, 5,20,390,239};
-     System.out.println(Arrays.toString(array));
-     for (int i = 0; i < array.length; i++){
-       System.out.println("term " + i + ": "+ quickselect(array, i));
-     }
-
-     System.out.println();*/
-
-     /*array = new int[] {4,19,6};
-     int[] ary = new int[] {4,19,6};
-     //System.out.println(Arrays.toString(array));
-     quicksort(array);
-     Arrays.sort(ary);
-     boolean equal = true;
-     for (int i = 0; i < ary.length; i++){
-       if (array[i] != ary[i]) equal = false;
-     }
-     System.out.println(equal);
-
-     System.out.println();
-
-     array = new int[] {40,-19, 39, 5,20,390,239};
-     ary = new int[] {40,-19, 39, 5,20,390,239};
-     System.out.println(Arrays.toString(array));
-     quicksort(array);
-     Arrays.sort(ary);
-     equal = true;
-     for (int i = 0; i < ary.length; i++){
-       if (array[i] != ary[i]) equal = false;
-     }
-     System.out.println(equal);
-
-     array = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
-     ary = new int[] {0,999,999,999,4,1,0,3,2,999,999,999};
-     System.out.println(Arrays.toString(array));
-     quicksort(array);
-     Arrays.sort(ary);
-     equal = true;
-     for (int i = 0; i < ary.length; i++){
-       if (array[i] != ary[i]) equal = false;
-     }
-     System.out.println(equal);
-
-     System.out.println();
-
-     array = new int[] {0,0,0,0,1,2,3,3,3,3,4,5,2,8,6};
-     ary = new int[] {0,0,0,0,1,2,3,3,3,3,4,5,2,8,6};
-     System.out.println(Arrays.toString(array));
-     quicksort(array);
-     Arrays.sort(ary);
-     equal = true;
-     for (int i = 0; i < ary.length; i++){
-       if (array[i] != ary[i]) equal = false;
-     }
-     System.out.println(equal);
-
-     /*array = new int[] {2,1,2,1,2,1,2,1,2,1,3,1,4,1,2,7,1};
-     System.out.println(Arrays.toString(partitionDutch(array, 0, array.length - 1)));
-     System.out.println(Arrays.toString(array));*/
-
-     int[] ary = new int[4000000];
-     for(int i = 0; i < ary.length;i++){
-       ary[i] = (int)(Math.random() * 100);
-     }
-     quicksort(ary);
-     //Arrays.sort(ary);
-     System.out.println(Arrays.toString(ary));
    }
 
 }
