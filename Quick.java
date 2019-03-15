@@ -80,7 +80,7 @@ public class Quick{
 
   /*return the value that is the kth smallest value of the array. k=0 is the smallest
    */
-   public static int quickselect(int[] data, int k){
+   public static int oldQuickselect(int[] data, int k){
      int start = 0;
      int end = data.length - 1;
      // set start to index 0 and end to last index
@@ -108,6 +108,37 @@ public class Quick{
      return data[ans];
      // return the value at index ans
    }
+
+   /*return the value that is the kth smallest value of the array. k=0 is the smallest
+    */
+    public static int quickselect(int[] data, int k){
+      int start = 0;
+      int end = data.length - 1;
+      // set start to index 0 and end to last index
+      //System.out.println(end);
+      int[] ans = partitionDutch(data, start, end);
+      // temp ans or pivot is equal to the return value after partitioning it once
+      while (k < ans[0] || k > ans[1]){
+        // while ans is not equal to k
+        //System.out.println("index : " + ans);
+        //System.out.println("data : " + Arrays.toString(data));
+        if (ans[0] > k){
+          // if ans is greater than k
+          end = ans[0] - 1;
+          // set end (upper bound) to one less than ans
+        }
+        else{
+          // else (if ans is less than k)
+          start = ans[1] + 1;
+          // set start (lower bound) to one more than ans
+        }
+        //System.out.println("start " + start + " end " + end);
+        ans = partitionDutch(data,start,end);
+        // call partition again with new start/end values and set the return value to ans
+      }
+      return data[ans[0]];
+      // return the value at index ans
+    }
 
    /*private static boolean parts(int index, int[] data, int start, int end){
      int pivot = data[index];
@@ -142,8 +173,13 @@ public class Quick{
      //set lt to the lowest index
      int gt = hi;
      // set gt to the highest index
-     int pivot = data[lt];
-     // set pivot to the value at lt
+     int index = (int)(Math.random() * (hi - lo + 1)) + lo;
+     // index of pivot would be a randomly generated int between lo and hi
+     int pivot = data[index];
+     // set pivot to the value at the index
+     data[index] = data[lo];
+     data[lo] = pivot;
+     // swap pivot with the value at lo
      //System.out.println("pivot: " + pivot);
      int i = lt + 1;
      // start comparing values from index lt + 1
@@ -229,6 +265,46 @@ public class Quick{
        }
        System.out.println();
      }
+
+     int[] list = new int[1000000];
+     int[] ary = new int[1000000];
+     for (int i = 0; i < list.length; i++){
+       list[i] = 1000000 - i;
+       ary[i] = list[i];
+     }
+     long t1 = System.currentTimeMillis();
+     quicksort(list);
+     long t2 = System.currentTimeMillis();
+     long qtime = t2-t1;
+     t1 = System.currentTimeMillis();
+     Arrays.sort(ary);
+     t2 = System.currentTimeMillis();
+     long btime = t2-t1;
+     System.out.println(1.0*qtime/btime);
+
+     int[] array = new int[] {999,999,999,4,1,0,3,2,999,999,999};
+     System.out.println(Arrays.toString(array));
+     //System.out.println(parts(partition(array, 0, 10), array, 0, 10));
+     for (int i = 0; i < array.length; i++){
+       System.out.println("term " + i + ": "+ quickselect(array, i));
+     }
+
+     System.out.println();
+
+     array = new int[] {4,19,6};
+     System.out.println(Arrays.toString(array));
+     for (int i = 0; i < array.length; i++){
+       System.out.println("term " + i + ": "+ quickselect(array, i));
+     }
+
+     System.out.println();
+
+     array = new int[] {40,-19, 39, 5,20,390,239};
+     System.out.println(Arrays.toString(array));
+     for (int i = 0; i < array.length; i++){
+       System.out.println("term " + i + ": "+ quickselect(array, i));
+     }
+
    }
 
 }
