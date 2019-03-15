@@ -265,7 +265,10 @@ public class Quick{
        }
        System.out.println();
      }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9655082a98822072012665842b5c08fe8f24a8a8
      int[] list = new int[1000000];
      int[] ary = new int[1000000];
      for (int i = 0; i < list.length; i++){
