@@ -220,8 +220,12 @@ public class Quick{
    }
 
    private static void quickH(int[] data, int lo, int hi){
-     if (lo >= hi){
+     /*if (lo >= hi){
        //if the lower index is less than or equal to the higher index, do nothing
+       return;
+     }*/
+     if (hi - lo < 50){
+       insertionsort(data, lo, hi);
        return;
      }
      int[] pivots = partitionDutch(data, lo, hi);
@@ -230,6 +234,24 @@ public class Quick{
      // call function itself with upper bound being one less than the gt index given by pivots
      quickH(data, pivots[1] + 1, hi);
      // call function itself with lower bound being one more than the lt index given by pivots
+   }
+
+   private static void insertionsort(int[] data, int lo, int hi){
+     for (int i = lo + 1; i <= hi; i++){
+       int temp = data[i];
+       boolean fixed = false;
+       int index = i - 1;
+       while (!fixed){
+         if (index < lo || data[index] < temp){
+           data[index + 1] = temp;
+           fixed = true;
+         }
+         else{
+           data[index + 1] = data[index];
+           index--;
+         }
+       }
+     }
    }
 
    public static void main(String[]args){
@@ -281,7 +303,7 @@ public class Quick{
      long btime = t2-t1;
      System.out.println(1.0*qtime/btime);
 
-     int[] array = new int[] {999,999,999,4,1,0,3,2,999,999,999};
+     /*int[] array = new int[] {999,999,999,4,1,0,3,2,999,999,999};
      System.out.println(Arrays.toString(array));
      //System.out.println(parts(partition(array, 0, 10), array, 0, 10));
      for (int i = 0; i < array.length; i++){
@@ -302,7 +324,7 @@ public class Quick{
      System.out.println(Arrays.toString(array));
      for (int i = 0; i < array.length; i++){
        System.out.println("term " + i + ": "+ quickselect(array, i));
-     }
+     }*/
 
    }
 
