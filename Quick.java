@@ -224,7 +224,7 @@ public class Quick{
        //if the lower index is less than or equal to the higher index, do nothing
        return;
      }*/
-     if (hi - lo < 60){
+     if (hi - lo < 42){
        insertionsort(data, lo, hi);
        return;
      }
